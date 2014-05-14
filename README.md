@@ -41,3 +41,12 @@ twitter @davidshimjs
 
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/davidshimjs/qrcodejs/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
+## Bookmark
+
+Add the following codes to browser's bookmark to give seletion or text a qrcode
+
+``` 
+javascript:var
+t=window.getSelection?window.getSelection().toString():(document.getSelection?document.getSelection():document.selection.createRange().text);t=t||window.location.href;window.open('https://github.com/superisaac/qrcodejs/blob/master/index.html?t='+encodeURIComponent(t),
+'_blank'); 
+```

@@ -1,0 +1,35 @@
+<html>
+  <head>
+    <script type="text/javascript" src="jquery.min.js"></script>
+    <script type="text/javascript" src="qrcode.min.js"></script>
+    <script>
+      $(document).ready(function(){
+	  var text = "empty";
+	  var matched = /t=([^&=]+)/.exec(window.location.search);
+	  if(matched) {
+	      text = decodeURIComponent(matched[1]);
+	  }
+	  var a = new QRCode(document.getElementById('qrCanvas'), {
+	      text: text,
+	      width: 256,
+	      height: 256,
+	      correctLevel: QRCode.CorrectLevel.M
+	  });
+	  $('#selected').text(text);
+	  var bookmark="javascript:var t=window.getSelection?window.getSelection().toString():(document.getSelection?document.getSelection():document.selection.createRange().text);t=t||window.location.href;window.open('$URI$?t='+encodeURIComponent(t), '_blank');".replace("$URI$", location.protocol + '//' + location.host + location.pathname);
+	  $('textarea').text(bookmark);
+      });
+    </script>
+    <style type="text/css">
+      h3 {font-size:14px; color:gray; margin:20px 0 6px 0;}
+    </style>
+  </head>
+  <body>
+    <div style="margin:20px auto; width:256px; height:256px;">
+    <div id="qrCanvas" style="width:256px; height:256px;"></div>
+    <h3>Selected Text</h3>
+    <div id="selected" style="background:#FAFAFA;padding:10px;"></div>
+    <h3>Add to browser's bookmark</h3>
+    <textarea style="width:100%; height:60px;"></textarea>      
+  </body>
+</htmL>
