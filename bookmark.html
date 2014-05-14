@@ -5,10 +5,11 @@
     <script>
 //<!--
       $(document).ready(function(){
-	  var text = "empty";
-	  var matched = /t=([^&=]+)/.exec(window.location.search);
-	  if(matched) {
-	      text = decodeURIComponent(matched[1]);
+	  var text = location.hash.substr(1);
+	  if(text) {
+	      text = decodeURIComponent(text);
+	  } else {
+	      text = 'empty';
 	  }
 	  var a = new QRCode(document.getElementById('qrCanvas'), {
 	      text: text,
@@ -17,7 +18,7 @@
 	      correctLevel: QRCode.CorrectLevel.M
 	  });
 	  $('#selected').text(text);
-	  var bookmark="javascript:var t=window.getSelection?window.getSelection().toString():(document.getSelection?document.getSelection():document.selection.createRange().text);t=t||window.location.href;window.open('$URI$?t='+encodeURIComponent(t), '_blank');".replace("$URI$", location.protocol + '//' + location.host + location.pathname);
+	  var bookmark="javascript:var t=window.getSelection?window.getSelection().toString():(document.getSelection?document.getSelection():document.selection.createRange().text);t=t||window.location.href;window.open('$URI$#'+encodeURIComponent(t), '_blank');".replace("$URI$", location.protocol + '//' + location.host + location.pathname);
 	  $('textarea').text(bookmark);
       });
 //-->
